@@ -21,7 +21,6 @@ public class DoodleJump {
 
 	public static void main(String[] args) {
 		DoodleJump d = new DoodleJump();
-
 	}
 
 }
