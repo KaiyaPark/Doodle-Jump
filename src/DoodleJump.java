@@ -17,6 +17,7 @@ public class DoodleJump {
 		g.startGame();
 		f.setSize(width, height);
 		f.addKeyListener(g);
+		
 	}
 
 	public static void main(String[] args) {
