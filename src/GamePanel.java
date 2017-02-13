@@ -19,23 +19,26 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	final int END_STATE = 2;
 	int currentState = MENU_STATE;
 	static BufferedImage grid;
+	static BufferedImage start;
 	GamePanel() {
 		try {
-			grid=ImageIO.read(this.getClass().getResourceAsStream("grid.gif"));
+			grid = ImageIO.read(this.getClass().getResourceAsStream("grid.gif"));
+			start = ImageIO.read(this.getClass().getResourceAsStream("start.jpg"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		startGame();
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		repaint();
-		if(currentState == MENU_STATE){
+		if (currentState == MENU_STATE) {
 			updateMenuState();
-		}else if(currentState == GAME_STATE){
+		} else if (currentState == GAME_STATE) {
 			updateGameState();
-		}else if(currentState == END_STATE){
+		} else if (currentState == END_STATE) {
 			updateEndState();
 		}
 
@@ -46,12 +49,12 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	}
 
 	public void paintComponent(Graphics g) {
-		
-		if(currentState == MENU_STATE){
+
+		if (currentState == MENU_STATE) {
 			drawMenuState(g);
-		}else if(currentState == GAME_STATE){
+		} else if (currentState == GAME_STATE) {
 			drawGameState(g);
-		}else if(currentState == END_STATE){
+		} else if (currentState == END_STATE) {
 			drawEndState(g);
 		}
 
@@ -64,18 +67,20 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
+
 		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 
 		}
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 
 		}
-		if(e.getKeyCode() == KeyEvent.VK_ENTER){
-			System.out.println("ihjiuhiuh");
-			currentState = currentState++;
+		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+
+			currentState = currentState + 1;
+
 		}
 
-		if(currentState > END_STATE){
+		if (currentState > END_STATE) {
 			currentState = MENU_STATE;
 		}
 	}
@@ -98,19 +103,16 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	}
 
 	void drawMenuState(Graphics g) {
-		g.setColor(Color.white);
-		g.fillRect(0, 0, 500, 800);
-//		System.out.println("hi");
+		g.drawImage(start, 0, 0, null);
 	}
 
 	void drawGameState(Graphics g) {
-		//System.out.println("hi");
 		g.drawImage(grid, 0, 0, 500, 800, null);
-		}
+	}
 
 	void drawEndState(Graphics g) {
 		g.setColor(Color.GRAY);
-		g.fillRect(0, 0, 500, 800);    
+		g.fillRect(0, 0, 500, 800);
 
 	}
 }
