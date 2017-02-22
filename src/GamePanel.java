@@ -20,6 +20,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	int currentState = MENU_STATE;
 	static BufferedImage grid;
 	static BufferedImage start;
+	Doodler d = new Doodler();
+	Platform p = new Platform();
 	GamePanel() {
 		try {
 			grid = ImageIO.read(this.getClass().getResourceAsStream("grid.gif"));
@@ -69,10 +71,10 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	public void keyPressed(KeyEvent e) {
 
 		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-
+			d.moveLeft = true;
 		}
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-
+			d.moveRight = true;
 		}
 		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 
@@ -87,7 +89,12 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-
+		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+			d.moveLeft = false;
+		}
+		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+			d.moveRight = false;
+		}
 	}
 
 	void updateMenuState() {
@@ -95,7 +102,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	}
 
 	void updateGameState() {
-
+		d.update();
+	
 	}
 
 	void updateEndState() {
@@ -108,6 +116,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 	void drawGameState(Graphics g) {
 		g.drawImage(grid, 0, 0, 500, 800, null);
+		d.draw(g);
+		p.draw(g);
 	}
 
 	void drawEndState(Graphics g) {
