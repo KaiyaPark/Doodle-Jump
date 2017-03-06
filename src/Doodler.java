@@ -36,10 +36,13 @@ public class Doodler extends GameObject {
 		}
 		rbox.setBounds(doodlex, doodley, 100, 90);
 	}
-
+	
 	void draw(Graphics g) {
 		g.drawImage(doodle, doodlex, doodley, null);
 		g.setColor(Color.red);
 		g.drawRect(rbox.x, rbox.y, rbox.width, rbox.height);
+	}
+	Rectangle getrBox(){
+		return rbox;
 	}
 }

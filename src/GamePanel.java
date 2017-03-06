@@ -22,6 +22,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	static BufferedImage start;
 	Doodler d = new Doodler();
 	Platform p = new Platform();
+
 	GamePanel() {
 		try {
 			grid = ImageIO.read(this.getClass().getResourceAsStream("grid.gif"));
@@ -103,7 +104,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 	void updateGameState() {
 		d.update();
-	
+		p.update();
+		checkCollision();
 	}
 
 	void updateEndState() {
@@ -123,6 +125,13 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	void drawEndState(Graphics g) {
 		g.setColor(Color.GRAY);
 		g.fillRect(0, 0, 500, 800);
+	}
 
+	private boolean checkCollision() {
+		if (d.getrBox().intersects(p.getrBox())) {
+			System.out.println("anything");
+			return true;
+		}
+		return false;
 	}
 }
