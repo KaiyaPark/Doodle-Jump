@@ -6,14 +6,14 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-public class Platform {
+public class Platform extends GameObject{
 	static BufferedImage plat;
-	int px = 250;
-	int py = 600;
 	Rectangle platform = new Rectangle();
-	Platform() {
+	Platform(int newX, int newY) {
 		try {
 			plat = ImageIO.read(this.getClass().getResourceAsStream("p.png"));
+			x = newX;
+			y = newY;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -23,12 +23,12 @@ public class Platform {
 		return platform;
 	}
 	void update(){
-		platform.setBounds(px, py, plat.getWidth(), plat.getHeight());
+		platform.setBounds(x, y, plat.getWidth(), 5);
 	}
 	
 	void draw(Graphics g){
-		g.drawImage(plat, px, py, null);
+		g.drawImage(plat, x, y, null);
 		g.setColor(Color.BLUE);
-		g.drawRect(px, py, plat.getWidth(), plat.getHeight());
+		g.drawRect(x, y, plat.getWidth(), 5);
 	}
 }

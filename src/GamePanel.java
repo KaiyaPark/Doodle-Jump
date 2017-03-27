@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 public class GamePanel extends JPanel implements ActionListener, KeyListener {
-	Timer t = new Timer(1000 / 10000, this);
+	Timer t = new Timer(7, this);
 	final int MENU_STATE = 0;
 	final int GAME_STATE = 1;
 	final int END_STATE = 2;
@@ -21,8 +21,10 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	static BufferedImage grid;
 	static BufferedImage start;
 	Doodler d = new Doodler();
-	Platform p = new Platform();
-
+	Platform p = new Platform(250, 575);
+	Platform p2 = new Platform(25, 700);
+	Platform p3 = new Platform(325, 300);
+	Platform p4 = new Platform(125, 400);
 	GamePanel() {
 		try {
 			grid = ImageIO.read(this.getClass().getResourceAsStream("grid.gif"));
@@ -86,6 +88,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		if (currentState > END_STATE) {
 			currentState = MENU_STATE;
 		}
+		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+			d.setY(d.getY() - 20);
+		}
 	}
 
 	@Override
@@ -105,7 +110,13 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	void updateGameState() {
 		d.update();
 		p.update();
+		p2.update();
+		p3.update();
+		p4.update();
 		checkCollision();
+		if(d.getY()>=825){
+			currentState = currentState + 1;
+		}
 	}
 
 	void updateEndState() {
@@ -120,6 +131,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.drawImage(grid, 0, 0, 500, 800, null);
 		d.draw(g);
 		p.draw(g);
+		p2.draw(g);
+		p3.draw(g);
+		p4.draw(g);
 	}
 
 	void drawEndState(Graphics g) {
@@ -128,8 +142,33 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	}
 
 	private boolean checkCollision() {
+		d.setY(d.getY()+1);
 		if (d.getrBox().intersects(p.getrBox())) {
-			System.out.println("anything");
+			p.setY(p.getY() + 150);
+			p2.setY(p2.getY() + 150);
+			p3.setY(p3.getY() + 150);
+			p4.setY(p4.getY() + 150);
+			return true;
+		}
+		if (d.getrBox().intersects(p2.getrBox())) {
+			p.setY(p.getY() + 150);
+			p2.setY(p2.getY() + 150);
+			p3.setY(p3.getY() + 150);
+			p4.setY(p4.getY() + 150);
+			return true;
+		}
+		if (d.getrBox().intersects(p3.getrBox())) {
+			p.setY(p.getY() + 150);
+			p2.setY(p2.getY() + 150);
+			p3.setY(p3.getY() + 150);
+			p4.setY(p4.getY() + 150);
+			return true;
+		}
+		if (d.getrBox().intersects(p4.getrBox())) {
+			p.setY(p.getY() + 150);
+			p2.setY(p2.getY() + 150);
+			p3.setY(p3.getY() + 150);
+			p4.setY(p4.getY() + 150);
 			return true;
 		}
 		return false;

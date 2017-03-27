@@ -23,22 +23,22 @@ public class Doodler extends GameObject {
 
 	void update() {
 		if(moveRight){
-			doodlex += speed;
+			x += speed;
 		}
 		if(moveLeft){
-			doodlex -= speed;
+			x -= speed;
 		}
-		if(doodlex<-25){
-			doodlex=500;
+		if(x<-25){
+			x=500;
 		}
-		if(doodlex>500){
-			doodlex=0;
+		if(x>500){
+			x=0;
 		}
-		rbox.setBounds(doodlex, doodley, 100, 90);
+		rbox.setBounds(x+30, y+80, 50, 5);
 	}
 	
 	void draw(Graphics g) {
-		g.drawImage(doodle, doodlex, doodley, null);
+		g.drawImage(doodle,x, y, null);
 		g.setColor(Color.red);
 		g.drawRect(rbox.x, rbox.y, rbox.width, rbox.height);
 	}
