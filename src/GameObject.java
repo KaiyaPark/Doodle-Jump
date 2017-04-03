@@ -15,6 +15,12 @@ public class GameObject {
 	public void setY(int l){
 		y = l;
 	}
+	public int getX(){
+		return x;
+	}
+	public void setX(int l){
+		x = l;
+	}
 	void update() {
 
 	}

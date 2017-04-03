@@ -2,8 +2,8 @@ import javax.swing.JFrame;
 
 public class DoodleJump {
 	JFrame f = new JFrame();
-	final int width = 500;
-	final int height = 800;
+	public static final int width = 500;
+	public static final int height = 800;
 	GamePanel g = new GamePanel();
 
 	DoodleJump() {
