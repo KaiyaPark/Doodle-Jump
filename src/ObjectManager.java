@@ -14,6 +14,18 @@ public class ObjectManager {
 		addObject(new Platform(700));
 		addObject(new Platform(300));
 		addObject(new Platform(400));
+		addObject(new Platform(150));
+		addObject(new Platform(0));
+		addObject(new Platform(-100));
+		addObject(new Platform(500));
+		addObject(new Platform(675));
+		addObject(new Platform(350));
+		addObject(new Platform(425));
+		addObject(new Platform(200));
+		addObject(new Platform(25));
+		addObject(new Platform(-200));
+		addObject(new Platform(800));
+		addObject(new Platform(750));
 	}
 
 	public void addObject(Platform o) {
@@ -33,20 +45,24 @@ public class ObjectManager {
 			o.update();
 		}
 	}
-public boolean isColliding(Rectangle doodleBox){
-	for (int i = 0; i < objects.size(); i++) {
-		Platform o = objects.get(i);
-		if (doodleBox.intersects(o.getrBox())) {
-			for(int j = 0; j < objects.size(); j++){
-				Platform p = objects.get(j);
-				p.setY(p.getY() + 150);
+
+	public boolean isColliding(Rectangle doodleBox) {
+		for (int i = 0; i < objects.size(); i++) {
+			Platform o = objects.get(i);
+			if (doodleBox.intersects(o.getrBox())) {
+
+				for (int j = 0; j < objects.size(); j++) {
+					Platform p = objects.get(j);
+					p.setY(p.getY() + 100);
+				
+					return true;
+				}
 			}
-			return true;
 		}
+		return false;
+
 	}
-	return false;
-	
-}
+
 	public void draw(Graphics g) {
 		for (int i = 0; i < objects.size(); i++) {
 			Platform o = objects.get(i);
@@ -54,8 +70,6 @@ public boolean isColliding(Rectangle doodleBox){
 		}
 	}
 
-
-	
 	public void reset() {
 		objects.clear();
 	}

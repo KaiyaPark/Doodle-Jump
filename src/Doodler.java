@@ -6,7 +6,7 @@ import javax.imageio.ImageIO;
 import java.awt.Color;
 public class Doodler extends GameObject {
 	static BufferedImage doodle;
-	int speed = 1;
+	int speed = 2;
 	boolean moveRight = false;
 	boolean moveLeft = false;
 	Rectangle rbox = new Rectangle();

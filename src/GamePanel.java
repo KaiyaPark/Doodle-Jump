@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 public class GamePanel extends JPanel implements ActionListener, KeyListener {
-	Timer t = new Timer(15, this);
+	Timer t = new Timer(13, this);
 	final int MENU_STATE = 0;
 	final int GAME_STATE = 1;
 	final int END_STATE = 2;
@@ -24,21 +24,24 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	final int doodlerStartX = 175;
 	final int doodlerStartY = 600;
 	ObjectManager oM = new ObjectManager();
+	DoodleJump main = new DoodleJump();
 
 	GamePanel() {
 		try {
-			grid = ImageIO.read(this.getClass().getResourceAsStream("grid.gif"));
+		grid = ImageIO.read(this.getClass().getResourceAsStream("grid.gif"));
 			start = ImageIO.read(this.getClass().getResourceAsStream("start.jpg"));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			 //TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		System.out.println("start panel");
 		startGame();
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		repaint();
+		System.out.println("hi");
 		if (currentState == MENU_STATE) {
 			updateMenuState();
 		} else if (currentState == GAME_STATE) {
@@ -114,8 +117,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		oM.update();
 		if (checkCollision()) {
 			repaint();
+			d.setY(d.getY() - 100);
 		}
-		if (d.getY() >= 825) {
+		if (d.getY() >= main.getHeight()) {
 			currentState = currentState + 1;
 		}
 	}
@@ -125,6 +129,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	}
 
 	void drawMenuState(Graphics g) {
+		System.out.println("start");
 		g.drawImage(start, 0, 0, null);
 	}
 

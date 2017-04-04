@@ -4,14 +4,17 @@ public class DoodleJump {
 	JFrame f = new JFrame();
 	public static final int width = 500;
 	public static final int height = 800;
-	GamePanel g = new GamePanel();
+	GamePanel g;
 
-	DoodleJump() {
-		setup();
+		public int getWidth(){
+		return width;
 	}
-
+	public int getHeight(){
+		return height;
+	}
 	void setup() {
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		g = new GamePanel();
 		f.add(g);
 		f.setVisible(true);
 		g.startGame();
@@ -22,6 +25,7 @@ public class DoodleJump {
 
 	public static void main(String[] args) {
 		DoodleJump d = new DoodleJump();
+		d.setup();
 	}
 
 }

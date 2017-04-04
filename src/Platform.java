@@ -10,7 +10,6 @@ import javax.imageio.ImageIO;
 public class Platform extends GameObject {
 	static BufferedImage plat;
 	Rectangle platform = new Rectangle();
-
 	Platform(int newY) {
 		try {
 			plat = ImageIO.read(this.getClass().getResourceAsStream("p.png"));
@@ -32,7 +31,9 @@ public class Platform extends GameObject {
 
 	void update() {
 		platform.setBounds(x, y, plat.getWidth(), 5);
-
+		if (y >= DoodleJump.height + 25) {
+			y = (-200);
+		}
 	}
 
 	void draw(Graphics g) {

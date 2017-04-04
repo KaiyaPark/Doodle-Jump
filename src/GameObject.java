@@ -21,6 +21,7 @@ public class GameObject {
 	public void setX(int l){
 		x = l;
 	}
+
 	void update() {
 
 	}
