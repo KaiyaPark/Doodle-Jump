@@ -38,7 +38,7 @@ public class Platform extends GameObject {
 
 	void draw(Graphics g) {
 		g.drawImage(plat, x, y, null);
-		g.setColor(Color.BLUE);
-		g.drawRect(x, y, plat.getWidth(), 5);
+		g.setColor(Color.WHITE);
+		g.drawRect(x, y, plat.getWidth(), 1);
 	}
 }

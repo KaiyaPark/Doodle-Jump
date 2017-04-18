@@ -34,12 +34,12 @@ public class Doodler extends GameObject {
 		if(x>500){
 			x=0;
 		}
-		rbox.setBounds(x+30, y+80, 50, 5);
+		rbox.setBounds(x+30, y+89, 50, 1);
 	}
 	
 	void draw(Graphics g) {
 		g.drawImage(doodle,x, y, null);
-		g.setColor(Color.red);
+		g.setColor(Color.white);
 		g.drawRect(rbox.x, rbox.y, rbox.width, rbox.height);
 	}
 	Rectangle getrBox(){

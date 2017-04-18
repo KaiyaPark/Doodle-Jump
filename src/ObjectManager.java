@@ -19,13 +19,12 @@ public class ObjectManager {
 		addObject(new Platform(-100));
 		addObject(new Platform(500));
 		addObject(new Platform(675));
-		addObject(new Platform(350));
 		addObject(new Platform(425));
 		addObject(new Platform(200));
 		addObject(new Platform(25));
 		addObject(new Platform(-200));
 		addObject(new Platform(800));
-		addObject(new Platform(750));
+		addObject(new Platform(725));
 	}
 
 	public void addObject(Platform o) {
@@ -50,13 +49,8 @@ public class ObjectManager {
 		for (int i = 0; i < objects.size(); i++) {
 			Platform o = objects.get(i);
 			if (doodleBox.intersects(o.getrBox())) {
-
-				for (int j = 0; j < objects.size(); j++) {
-					Platform p = objects.get(j);
-					p.setY(p.getY() + 100);
-				
-					return true;
-				}
+				fall(50);
+				return true;
 			}
 		}
 		return false;

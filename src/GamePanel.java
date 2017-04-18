@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 public class GamePanel extends JPanel implements ActionListener, KeyListener {
-	Timer t = new Timer(13, this);
+	Timer t = new Timer(5, this);
 	final int MENU_STATE = 0;
 	final int GAME_STATE = 1;
 	final int END_STATE = 2;
@@ -34,14 +34,12 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			 //TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("start panel");
 		startGame();
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		repaint();
-		System.out.println("hi");
 		if (currentState == MENU_STATE) {
 			updateMenuState();
 		} else if (currentState == GAME_STATE) {
@@ -129,7 +127,6 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	}
 
 	void drawMenuState(Graphics g) {
-		System.out.println("start");
 		g.drawImage(start, 0, 0, null);
 	}
 

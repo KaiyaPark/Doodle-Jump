@@ -2,7 +2,7 @@ import java.awt.Graphics;
 
 public class GameObject {
 	int x = 175;
-	int y = 600;
+	int y = 500;
 	int width = 100;
 	int height = 100;
 
