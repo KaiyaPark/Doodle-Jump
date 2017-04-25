@@ -1,4 +1,6 @@
+import java.applet.AudioClip;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,6 +10,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.JApplet;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -15,6 +18,7 @@ import javax.swing.Timer;
 public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	Timer t = new Timer(5, this);
 	final int MENU_STATE = 0;
+	Font hi = new Font("Tangerine", Font.PLAIN, 24);
 	final int GAME_STATE = 1;
 	final int END_STATE = 2;
 	int currentState = MENU_STATE;
@@ -25,16 +29,18 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	final int doodlerStartY = 600;
 	ObjectManager oM = new ObjectManager();
 	DoodleJump main = new DoodleJump();
+	int score;
 
 	GamePanel() {
 		try {
-		grid = ImageIO.read(this.getClass().getResourceAsStream("grid.gif"));
+			grid = ImageIO.read(this.getClass().getResourceAsStream("grid.gif"));
 			start = ImageIO.read(this.getClass().getResourceAsStream("start.jpg"));
 		} catch (IOException e) {
-			 //TODO Auto-generated catch block
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		startGame();
+		score = 0;
 	}
 
 	@Override
@@ -95,7 +101,14 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			d.setY(d.getY() - 20);
 		}
 	}
-
+	private void bing(){
+		try{
+			AudioClip sound = JApplet.newAudioClip(getClass().getResource("bing.wav"));
+			sound.play();
+		} catch(Exception e){
+			
+		}
+	}
 	@Override
 	public void keyReleased(KeyEvent e) {
 		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
@@ -116,6 +129,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		if (checkCollision()) {
 			repaint();
 			d.setY(d.getY() - 100);
+			score = score + 1;
+			bing();
 		}
 		if (d.getY() >= main.getHeight()) {
 			currentState = currentState + 1;
@@ -134,13 +149,16 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.drawImage(grid, 0, 0, 500, 800, null);
 		d.draw(g);
 		oM.draw(g);
+		g.setColor(Color.BLACK);
+		g.setFont(hi);
+		g.drawString("Score is " + score, 350, 75);
 	}
 
 	void drawEndState(Graphics g) {
 		g.setColor(Color.GRAY);
 		g.fillRect(0, 0, 500, 800);
 		g.setColor(Color.WHITE);
-		g.drawString("You lose! To play again press enter.", 125, 200);
+		g.drawString("You lose! Your score was " + score + ". Beat your score! To play again press enter.", 25, 200);
 	}
 
 	private boolean checkCollision() {
