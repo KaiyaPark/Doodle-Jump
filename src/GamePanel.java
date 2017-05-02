@@ -19,11 +19,13 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	Timer t = new Timer(5, this);
 	final int MENU_STATE = 0;
 	Font hi = new Font("Tangerine", Font.PLAIN, 24);
+	Font his = new Font("Tangerine", Font.PLAIN, 18);
 	final int GAME_STATE = 1;
 	final int END_STATE = 2;
 	int currentState = MENU_STATE;
 	static BufferedImage grid;
 	static BufferedImage start;
+	static BufferedImage pic;
 	Doodler d = new Doodler();
 	final int doodlerStartX = 175;
 	final int doodlerStartY = 600;
@@ -35,6 +37,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		try {
 			grid = ImageIO.read(this.getClass().getResourceAsStream("grid.gif"));
 			start = ImageIO.read(this.getClass().getResourceAsStream("start.jpg"));
+			pic = ImageIO.read(this.getClass().getResourceAsStream("Pic.jpeg"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -117,10 +120,18 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 			d.moveRight = false;
 		}
+		if (e.getKeyCode() == KeyEvent.VK_UP) {
+		JOptionPane.showMessageDialog(null, "To move, press the left and right arrow keys.");			
+		JOptionPane.showMessageDialog(null, "Bounce on the platforms to move up and try not to fall off the screen");
+		JOptionPane.showMessageDialog(null, "For an extra little boost, press the spacebar.");
+		JOptionPane.showMessageDialog(null, "If you get stuck, exit out of the program and restart the game.");
+		JOptionPane.showMessageDialog(null, "Enjoy the game.");	
+		JOptionPane.showMessageDialog(null, "To start press enter.");
+		}
 	}
 
 	void updateMenuState() {
-
+		score = 0;
 	}
 
 	void updateGameState() {
@@ -143,6 +154,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 	void drawMenuState(Graphics g) {
 		g.drawImage(start, 0, 0, null);
+		g.setFont(his);
+		g.drawString("Press the up arrow for rules", 200, 675);
 	}
 
 	void drawGameState(Graphics g) {
@@ -155,10 +168,11 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	}
 
 	void drawEndState(Graphics g) {
-		g.setColor(Color.GRAY);
-		g.fillRect(0, 0, 500, 800);
-		g.setColor(Color.WHITE);
-		g.drawString("You lose! Your score was " + score + ". Beat your score! To play again press enter.", 25, 200);
+		g.drawImage(pic, 0, 0, 500, 800, null);
+		g.setFont(hi);
+		g.drawString("Your score was " + score + "", 150, 155);
+		g.drawString("To play again press enter.", 100, 275);
+		
 	}
 
 	private boolean checkCollision() {
